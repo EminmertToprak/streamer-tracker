@@ -33,15 +33,18 @@ export default function LogInPage() {
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-center">
-      <h1 className="text-2xl font-extrabold">
-        Streamer <span className="text-gradient">Tracker</span>
-      </h1>
+      <div className="container flex flex-row items-center justify-center gap-4 px-4 py-16">
+        <h1 className="text-2xl font-extrabold">
+          Streamer <span className="text-gradient">Tracker</span>
+        </h1>
+        <img src="/logo.png" alt="logo" className="h-12 w-12" />
+      </div>
       <h2 className="text-white-600 mt-4 text-center text-xl font-bold">
         Log In
       </h2>
       <form
         onSubmit={handleSubmit}
-        className="flex w-auto flex-col items-center gap-4 rounded border border-gray-300 p-4"
+        className="flex w-1/4 flex-col items-center gap-4 rounded border border-gray-300 p-4"
       >
         <div className={formStyle}>
           <label htmlFor="email" className={labelStyle}>
@@ -76,7 +79,7 @@ export default function LogInPage() {
         </div>
         <div
           id="buttons"
-          className="flex w-full flex-row flex-wrap items-center justify-center gap-4 text-center"
+          className="flex h-full w-full flex-row flex-nowrap items-center justify-center gap-4 text-center"
         >
           <button
             id="log-in-button"
