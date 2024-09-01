@@ -2,6 +2,7 @@
 import TopNav from "../_components/topnav";
 import SideNav from "../_components/sidenav";
 import template_image from "../images/twitch_ph.jpg";
+import ChatBox from "../_components/chatbox";
 
 export default function HomePage() {
   return (
@@ -52,9 +53,7 @@ export default function HomePage() {
             id="chatbox"
             className="border-white-300 flex w-1/5 flex-col items-center justify-center gap-4 p-4 text-white"
           >
-            [messagesbox]
-            <br />
-            [chatbox]
+            <ChatBox />
           </div>
         </div>
       </div>
