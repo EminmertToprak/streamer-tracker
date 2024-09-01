@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function LogInPage() {
   interface FormData {
@@ -22,10 +23,12 @@ export default function LogInPage() {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
+  const router = useRouter();
   const handleSubmit = async (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      // Handle login logic here
+      router.push("/home");
+      console.log("login clicked");
     } catch (error) {
       console.log(error);
     }
@@ -56,7 +59,7 @@ export default function LogInPage() {
             id="email"
             onChange={handleChange}
             value={formData.email}
-            required
+            // required
             maxLength={40}
             className={inputBoxStyle}
           />
@@ -72,7 +75,7 @@ export default function LogInPage() {
             id="password"
             onChange={handleChange}
             value={formData.password}
-            required
+            // required
             maxLength={15}
             className={inputBoxStyle}
           />
