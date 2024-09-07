@@ -3,10 +3,11 @@
 
 import { sql } from "drizzle-orm";
 import {
+  bigserial,
   index,
   pgTableCreator,
-  serial,
   timestamp,
+  uuid,
   varchar,
 } from "drizzle-orm/pg-core";
 
@@ -16,21 +17,27 @@ import {
  *
  * @see https://orm.drizzle.team/docs/goodies#multi-project-schema
  */
-export const createTable = pgTableCreator((name) => `streamer-tracker_${name}`);
+export const createTable = pgTableCreator((name) => `${name}`);
 
-export const posts = createTable(
-  "post",
+export const users = createTable(
+  "users",
   {
-    id: serial("id").primaryKey(),
-    name: varchar("name", { length: 256 }),
+    id: uuid("id").defaultRandom().primaryKey(),
+    fullName: varchar("full_name", { length: 256 }).notNull(),
     createdAt: timestamp("created_at", { withTimezone: true })
       .default(sql`CURRENT_TIMESTAMP`)
       .notNull(),
     updatedAt: timestamp("updated_at", { withTimezone: true }).$onUpdate(
-      () => new Date()
+      () => new Date(),
     ),
   },
-  (example) => ({
-    nameIndex: index("name_idx").on(example.name),
-  })
+  (users) => ({
+    nameIdx: index("name_idx").on(users.fullName),
+  }),
 );
+
+export const authOtps = createTable("auth_otp", {
+  id: bigserial("id", { mode: "number" }).primaryKey(),
+  phone: varchar("phone", { length: 256 }),
+  userId: uuid("user_id").references(() => users.id),
+});
