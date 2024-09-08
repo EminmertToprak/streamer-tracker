@@ -1,8 +1,11 @@
+import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
 
 export async function GET(request: Request) {
-    return NextResponse.json(
-        { message: "This route is protected" },
-        { status: 200 },
-      );
+  const session = await getServerSession();
+
+  return NextResponse.json(
+    { message: `This route is protected, logged in as ${session?.user.name}` },
+    { status: 200 },
+  );
 }

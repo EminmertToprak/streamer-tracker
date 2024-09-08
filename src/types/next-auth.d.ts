@@ -9,9 +9,17 @@ declare module "next-auth" {
       email?: string | null;
       image?: string | null;
     };
+    token: {
+      id: string;
+    };
+  }
+
+  interface Profile {
+    preferred_username: string | null;
   }
 
   interface JWT {
     accessToken?: string;
+    id: string
   }
 }

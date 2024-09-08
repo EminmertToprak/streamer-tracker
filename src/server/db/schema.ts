@@ -23,7 +23,8 @@ export const users = createTable(
   "users",
   {
     id: uuid("id").defaultRandom().primaryKey(),
-    fullName: varchar("full_name", { length: 256 }).notNull(),
+    email: varchar("email", { length: 256 }),
+    displayName: varchar("display_name", { length: 256 }),
     createdAt: timestamp("created_at", { withTimezone: true })
       .default(sql`CURRENT_TIMESTAMP`)
       .notNull(),
@@ -32,12 +33,27 @@ export const users = createTable(
     ),
   },
   (users) => ({
-    nameIdx: index("name_idx").on(users.fullName),
+    //example index
+    //nameIdx: index("name_idx").on(users.fullName),
   }),
 );
 
-export const authOtps = createTable("auth_otp", {
-  id: bigserial("id", { mode: "number" }).primaryKey(),
-  phone: varchar("phone", { length: 256 }),
-  userId: uuid("user_id").references(() => users.id),
-});
+export const userProviders = createTable(
+  "user_providers",
+  {
+    id: bigserial("id", { mode: "number" }).primaryKey(),
+    userId: uuid("user_id").references(() => users.id),
+    provider: varchar("provider", { length: 256 }),
+    providerAccountId: varchar("provider_account_id", { length: 256 }),
+    accessToken: varchar("accessToken", { length: 256 }),
+    refreshToken: varchar("refreshToken", { length: 256 }),
+    createdAt: timestamp("created_at", { withTimezone: true })
+      .default(sql`CURRENT_TIMESTAMP`)
+      .notNull(),
+  },
+  (userProviders) => ({
+    providerAccountIdIndex: index("provider_account_id_index").on(
+      userProviders.providerAccountId,
+    ),
+  }),
+);

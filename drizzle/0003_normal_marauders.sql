@@ -1,0 +1,1 @@
+CREATE INDEX IF NOT EXISTS "provider_account_id_index" ON "user_providers" USING btree ("provider_account_id");

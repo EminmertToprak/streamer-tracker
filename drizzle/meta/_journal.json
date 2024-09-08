@@ -15,6 +15,20 @@
       "when": 1725748415902,
       "tag": "0001_gray_lord_hawal",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1725804041809,
+      "tag": "0002_soft_zodiak",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1725804207646,
+      "tag": "0003_normal_marauders",
+      "breakpoints": true
     }
   ]
 }
