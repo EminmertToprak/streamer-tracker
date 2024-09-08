@@ -8,7 +8,7 @@ interface CreateUserRequest {
 
 interface CreateUserResponse {
   id: string;
-  name: string;
+  name: string|null;
   createdAt: Date;
 }
 
@@ -22,14 +22,14 @@ export async function POST(request: Request) {
   try {
     const result = await db
       .insert(users)
-      .values({ fullName: name })
+      .values({ displayName: name })
       .returning();
 
     if (result[0] === undefined) throw "wrong";
 
     const newUser: CreateUserResponse = {
       id: result[0].id,
-      name: result[0].fullName,
+      name: result[0].displayName,
       createdAt: result[0].createdAt,
     };
 
