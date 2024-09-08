@@ -2,6 +2,7 @@ import "~/styles/globals.css";
 
 import { GeistSans } from "geist/font/sans";
 import { type Metadata } from "next";
+import SessionProviderWrapper from "./_components/sessionProviderWrapper";
 
 export const metadata: Metadata = {
   title: "Streamer Tracker",
@@ -15,7 +16,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${GeistSans.variable}`}>
       <body className="bg-gradient-to-b from-[#000] to-[#15162c] text-white">
-        {children}
+        <SessionProviderWrapper>{children}</SessionProviderWrapper>
       </body>
     </html>
   );

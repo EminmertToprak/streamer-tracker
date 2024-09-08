@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
+import { signIn } from "next-auth/react";
 
 export default function LogInPage() {
   interface FormData {
@@ -94,6 +95,7 @@ export default function LogInPage() {
           <button
             id="twitch-button"
             type="button"
+            onClick={() => signIn("twitch", { callbackUrl: "/profile" })}
             data-twe-ripple-init
             data-twe-ripple-color="light"
             className="mx-auto my-2 block h-12 w-1/2 cursor-pointer select-none rounded bg-[#9146ff] px-4 py-2 text-center font-bold text-white hover:bg-[#7517ff] disabled:cursor-not-allowed disabled:text-gray-300"
